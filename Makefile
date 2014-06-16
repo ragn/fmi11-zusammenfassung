@@ -1,6 +1,6 @@
 filename = zusammenfassung
 
-neededfiles = 
+neededfiles = dea
 
 UNAME_S := $(shell uname -s)
 
