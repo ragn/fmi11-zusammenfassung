@@ -1,0 +1,133 @@
+\part{DEA}
+
+\section{Formale Definition}
+
+$A=(Q,\Sigma,\delta,q_{i},F)$
+
+Q ist die Menge aller möglichen Zustände = $\{q_0,q_1,...,q_{n-1}\}$
+
+$\Sigma$ ist die Menge aller möglichen Eingaben = $\{e_0,e_{1},...,e_{n-1}\}$
+
+F ist die Menge aller möglichen Endzustände = $F\subseteq Q$
+
+$q_{i}\epsilon Q$ der Endzustand ist in Q enthalten
+
+$\delta:Q \times \Sigma \rightarrow Q$ ist die Transitionsfunktion und beschreibt
+den Übergang vom einem Zustand aus Q mit der Kombination einer Eingabe
+aus $\Sigma$zu einem Zustand aus Q
+
+(1)$\delta(q_{i},e_{j})=q_{m}$
+
+(2)$\delta(q_{j},e_{k})=q_{n}$
+
+(3)$\delta(q_{j},e_{k})=undefiniert$
+
+\paragraph{Beispiel:}\mbox{} \\
+
+$A=(Q,\Sigma,\delta,q_{0},F)$
+
+$Q=\{q_{0},q_{1}\}$
+
+$\Sigma=\{0,1\}$
+
+$\delta=Qx\Sigma\rightarrow Q$
+
+(1)$\delta(q_{0},0)=q_{1}$
+
+(2)$\delta(q_{0},1)=undefiniert$
+
+(3)$\delta(q_{1},0)=undefiniert$
+
+(4)$\delta(q_{1},1)=q_{0}$
+
+$F=\{q_{1}\}$
+
+\section{Zustandsdiagramm}
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2.5 cm, scale = 1, transform shape]
+
+\node[initial,state] 				(A)                  {$q_0$};
+\node[state]         				(B) [right of=A]     {$q_2$};
+\node[state,accepting]         		(C) [above of=B]     {$q_1$};
+\node[state,accepting]         		(D) [below of=B]     {$q_3$};
+
+\path[->] 	(A) edge [left]   		node [align=center]  {$ e_i $} (C)
+      		(A) edge [above]      	node [align=center]  {$ e_j $} (B)
+      		(A) edge [left]       	node [align=center]  {$ e_i $} (D)
+      		(B) edge [right]      	node [align=center]  {$ e_k $} (D)
+      		(C) edge [loop above] 	node [align=center]  {$ e_j $} (C)
+      		(D) edge [loop below] 	node [align=center]  {$ e_i $} (D);
+
+\end{tikzpicture}
+
+\paragraph{Beispiel:}\mbox{} \\
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2.5 cm, scale = 1, transform shape]
+
+\node[initial,state] 				(A)                          {$q_0$};
+\node[state,accepting] 				(B) [right of=A]             {$q_1$};
+
+\path[->] 	(A) edge [right, above]   	node [align=center]  {$ 0 $} (B)
+      		(B) edge [bend left, below] node [align=center]  {$ 1 $} (A);
+
+\end{tikzpicture}
+
+\section{Automatentafel}
+
+$\rightarrow Startzustand$\\
+$\boxempty Endzustand$\\
+
+\begin{tabular}{|c|c|c|}
+\hline 
+$\delta$ & $E_{0}$ & $E_{1}$\tabularnewline
+\hline 
+\hline 
+$\rightarrow Q_{i}$ & $Q_{j}$ & -\tabularnewline
+\hline 
+$\boxempty Q_{i}$ & - & $Q_{j}$\tabularnewline
+\hline 
+\end{tabular}
+
+\paragraph{Beispiel:}\mbox{} \\
+
+\begin{tabular}{|c|c|c|}
+\hline 
+$\delta$ & $0$ & $1$\tabularnewline
+\hline 
+\hline 
+$\rightarrow Q_{0}$ & $Q_{1}$ & -\tabularnewline
+\hline 
+$\boxempty Q_{1}$ & - & $Q_{0}$\tabularnewline
+\hline 
+\end{tabular}
+
+\section{Akzeptierte Sprachen}
+
+Eine akzeptierte (erkannte) Sprache besteht aus all denjenigen Wörtern \textit{w}, die den Automaten aus der Anfangskonfiguration ($q_0$,w) in eine Konfiguration (q, $\epsilon$) überführen, bei dem der Zustand \textit{q} ein Endzustand ist.
+
+\begin{itemize}
+	\item Eine Konfiguration die keine Folgekonfiguration besitzt ist eine \textbf{Stopp-Konfiguration}.
+	\item Die durch eine Konfigurationsfolge $(q_0,w_0) \vdash (q_1, w_1) \vdash (q_2, w_2) \vdash...)$ durchlaufene Zustandsfolge ($q_0,q_1,q_2,...$) wird \textbf{Pfad} genannt.
+	\item Der durch eine akzeptierende Konfigurationsfolge beschriebene Pfad wird \textbf{akzeptierter Pfad genannt}.
+\end{itemize}
+
+
+A $\vdash$ B wird als \glqq B ist aus A herleitbar\grqq gelesen.
+
+\subsection{Formale Definition}
+
+$L(A) = \{w|w = (wort), Bedingung\} \subseteq \Sigma^*$
+
+\paragraph{Beispiel:}\mbox{} \\
+
+$L(A_1) = \{w|w \epsilon \mathbb{N} \textrm{ und w ist gerade} \} \subseteq \Sigma^* = \{0,1,2,3,...,9\}$\\
+Erkennt alle einstelligen geraden Zahlen.\\
+
+$L(A_2) = \{w| u \epsilon \Sigma^* \textrm{ : w = u01}\} \subseteq \Sigma^* = \{ a, b\}$\\
+Erkennt alle Eingaben die mit 01 enden.\\
+
+$L(A_2) = \{w| u \epsilon \Sigma^* \textrm{ : w = 01u}\} \subseteq \Sigma^* = \{ a, b\}$\\
+Erkennt alle Eingaben die mit 01 beginnen.\\
+
+$L(A_2) = \{w| u,v \epsilon \Sigma^* \textrm{ : w = u01v}\} \subseteq \Sigma^* = \{ a, b\}$\\
+Erkennt alle Eingaben die 01 enthalten.\\
