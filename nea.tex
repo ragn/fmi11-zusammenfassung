@@ -15,17 +15,18 @@ $q_{i}\epsilon Q$ der Endzustand ist in Q enthalten
 $\delta:Q \times (\Sigma \bigcup \{\epsilon\}) \rightarrow 2^Q$
 
 %$\{\delta_1(q,a)\}$ für alle q $\epsilon$ $\Sigma$ und a $\epsilon$ $\Sigma$, für die $\delta_1(q,a)$ definiert ist 
+
 \[
-x = 
-\begin{cases}
-	\{\delta_1(q_i,a)\} & \text{ für alle q } \epsilon \Sigma \text{ und a } \epsilon \Sigma \text{, für die } \delta_1(q_i,a) \text{ definiert ist} \\
+ x =
+  \begin{cases}
+   \{\delta_1(q_i,a)\} & \text{ für alle q } \epsilon \Sigma \text{ und a } \epsilon \Sigma \text{, für die } \delta_1(q_i,a) \text{ definiert ist} \\
 	\emptyset & \text{ sonst}
-\end{cases}
+  \end{cases}
 \]
 
-Es muss bei der Definition explizit darauf hingewiesen werden welcher Automatentype vorhanden ist (DEA/NEA).
+Es muss bei der Definition explizit darauf hingewiesen werden welcher Automatentyp vorhanden ist (DEA/NEA).
 
-\paragraph{Beispiel:}\mbox{} \\
+\section*{Beispiel:}\mbox{} \\
 
 
 \section{Zustandsdiagramm}
@@ -62,7 +63,7 @@ Es muss bei der Definition explizit darauf hingewiesen werden welcher Automatent
 
 \paragraph{Beispiel:}\mbox{} \\
 \begin{tabular}{ l | c r }
-  $\sigma$ 		& a 	& b \\
+  $\delta$ 		& a 	& b \\
   \hline
   $\rightarrow q_0$ 	& $\{q_1,q_2,q_3\}$ & $\{q_3,q_5\}$ \\
   $q_1$				& $\{q_1,q_2,q_3\}$	& $\emptyset$ \\
@@ -74,4 +75,39 @@ Es muss bei der Definition explizit darauf hingewiesen werden welcher Automatent
 
 \section{Umwandlung $\epsilon$-NEA in NEA}
 
+$\epsilon$-Übergänge sind Zustandsübergänge ohne Eingabe, denn $\epsilon$ bedeutet, dass man keine Eingabe tätigt.
+
 \section{Umwandlung NEA $\rightarrow$ DEA}
+
+\begin{table}[!htb]    
+    \begin{minipage}{.5\linewidth}
+      \caption{Ursprungs-NEA}
+      \centering
+      \begin{tabular}{ l | c r }
+		  $\delta$ 		& a 	& b \\
+		  \hline
+		  $\rightarrow q_0$ 	& $\{q_1,q_2,q_3\}$ & $\{q_3,q_5\}$ \\
+		  $q_1$					& $\{q_1,q_2,q_3\}$	& $\emptyset$ \\
+		  $q_2$					& $\emptyset$		& $\emptyset$ \\
+		  $emptybox q_3$		& $\emptyset$		& $\emptyset$ \\
+		  $q_4$					& $\emptyset$		& $\{q_5,q_3\}$ \\
+		  $q_5$					& $\emptyset$		& $\{q_4\}$
+		\end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \caption{Äquivalenter DEA}
+        \begin{tabular}{ l | c r }
+		  $\delta$ 		& a 	& b \\
+		  \hline
+		  $\rightarrow q_0$ 	& $\{q_1,q_2,q_3\}$ & $\{q_3,q_5\}$ \\
+		  $\Box \{q_1,q_2,q_3\}$		& $\{q_1,q_2,q_3\}$	& $\emptyset$ \\
+		  $\Box \{q_3,q_5\}$	& $\emptyset$		& $\{q_4\}$ \\
+		  $q_4$					& $\emptyset$		& $\{q_5,q_3\}$ \\	
+		  						&					& \\
+		  						&					& \\
+		\end{tabular}
+    \end{minipage} 
+\end{table}
+
+\includegraphics[width=\textwidth]{nea2dea}
