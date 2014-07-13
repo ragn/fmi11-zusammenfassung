@@ -1,9 +1,12 @@
 @echo off
-set path=C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\
-set pdflatex=pdflatex.exe
-IF NOT EXIST "%path%" (
-set path="C:\Program Files\MiKTeX 2.9\miktex\bin\"
-)
+set PDFLATEX=pdflatex.exe
+set PATH="%localappdata%\MikTex 2.9\miktex\bin\"
+
 echo %path%
-"%path%%pdflatex%" -shell-escape zusammenfassung
-"%path%%pdflatex%" -shell-escape zusammenfassung
+
+IF NOT EXIST %path% (
+	set PATH="%programfiles(x86)%\MiKTeX 2.9\miktex\bin\"
+)
+
+%PATH%%PDFLATEX% -shell-escape zusammenfassung
+%PATH%%PDFLATEX% -shell-escape zusammenfassung
